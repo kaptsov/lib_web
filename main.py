@@ -4,6 +4,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from os import makedirs
 from more_itertools import chunked
+from math import ceil
 
 
 def rebuild():
@@ -18,15 +19,18 @@ def rebuild():
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    makedirs('pages')
+    makedirs('pages', exist_ok=True)
     template = env.get_template('template.html')
+    chunk_size = 100
 
-    for i, cards_chunk in enumerate(chunked(cards, 20)):
+    pages_count = ceil(len(cards) / chunk_size)
 
-        rendered_page = template.render(cards=cards_chunk, num=i)
+    for i, cards_chunk in enumerate(chunked(cards, chunk_size)):
 
+        rendered_page = template.render(cards=cards_chunk, num=i, pages_count=pages_count)
         with open(f'pages/index{i}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
+
     print("Site rebuilt")
 
 
@@ -34,7 +38,7 @@ def main():
 
     rebuild()
     server = Server()
-    server.watch('index.html', rebuild)
+    server.watch('index0.html', rebuild)
     server.serve(root='.')
 
 

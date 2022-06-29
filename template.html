@@ -11,7 +11,27 @@
     <title>Библиотека Деда Максима - {{num}}</title>
   </head>
   <body>
-    <h1 class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Библиотека Деда Максима - {{num}}</h1>
+
+    <h1 class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Библиотека Деда Максима - {{num}}</h1>
+      <nav aria-label="Pagintor" >
+        <ul class="pagination justify-content-center">
+          {% if num == 0 %}
+            <li class="page-item disabled"><a class="page-link" href="#">Назад</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="index{{num-1}}.html">Назад</a></li>
+          {% endif %}
+          {% for page in range(pages_count) %}
+            <li class="page-item {% if (num == page) %} active {% endif %} "><a class="page-link" href="index{{page}}.html">{{page}}</a></li>
+          {% endfor %}
+          {% if num == pages_count-1 %}
+            <li class="page-item disabled"><a class="page-link" href="#">Вперед</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="index{{ num+1 }}.html">Вперед</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+
+
     <div class="container">
       <div class="row row-cols-2">
         {% for card in cards %}
