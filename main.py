@@ -2,6 +2,8 @@ import json
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
+from os import makedirs
+from more_itertools import chunked
 
 
 def rebuild():
@@ -16,12 +18,15 @@ def rebuild():
         autoescape=select_autoescape(['html', 'xml'])
     )
 
+    makedirs('pages')
     template = env.get_template('template.html')
 
-    rendered_page = template.render(cards=cards)
+    for i, cards_chunk in enumerate(chunked(cards, 20)):
 
-    with open('index.html', 'w', encoding="utf8") as file:
-        file.write(rendered_page)
+        rendered_page = template.render(cards=cards_chunk, num=i)
+
+        with open(f'pages/index{i}.html', 'w', encoding="utf8") as file:
+            file.write(rendered_page)
     print("Site rebuilt")
 
 
