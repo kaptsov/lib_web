@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
@@ -46,11 +46,11 @@
                 <div class="col-md-4">
                   {% if path_exists(card.hash) %}
                     <img class="card-img"
-                      src="/library/images/{{card.hash}}"
+                      src="../library/images/{{card.hash}}"
                       alt="{{card.title}}">
                   {% else %}
                     <img class="card-img"
-                      src="/library/images/nopic.gif"
+                      src="../library/images/nopic.gif"
                       alt="{{card.title}}">
                   {% endif %}
                 </div>
@@ -62,7 +62,7 @@
                       <span class="badge badge-secondary">{{genre}}</span>
                     {% endfor %}
                     <br>
-                    <a class="mt-4"  href="/library/books/{{card.author}} - {{card.title}}.txt" target="_blank">[Читать]</a>
+                    <a class="mt-4"  href="../library/books/{{card.author}} - {{card.title}}.txt" target="_blank">[Читать]</a>
                   </div>
                 </div>
               </div>
@@ -72,9 +72,9 @@
       </div>
     </div>
 
-    <script src="/js/jquery-3.4.1.slim.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.4.1.slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
   </body>
 </html>
