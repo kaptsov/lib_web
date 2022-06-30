@@ -1,11 +1,11 @@
 import json
+from math import ceil
+from os import makedirs
+from os.path import exists
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
-from os import makedirs
-from os.path import exists
 from more_itertools import chunked
-from math import ceil
 
 
 def path_exists(path):
