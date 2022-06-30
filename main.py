@@ -3,8 +3,13 @@ import json
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from os import makedirs
+from os.path import exists
 from more_itertools import chunked
 from math import ceil
+
+
+def path_exists(path):
+    return exists(f'library/images/{path}')
 
 
 def rebuild():
@@ -27,7 +32,7 @@ def rebuild():
 
     for i, cards_chunk in enumerate(chunked(cards, chunk_size)):
 
-        rendered_page = template.render(cards=cards_chunk, num=i, pages_count=pages_count)
+        rendered_page = template.render(cards=cards_chunk, num=i, pages_count=pages_count, path_exists=path_exists)
         with open(f'pages/index{i}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
