@@ -12,12 +12,10 @@ def path_exists(path):
     return exists(f'library/{path}')
 
 
-def rebuild():
+def rebuild_pages():
 
-    with open("library/library.json", "r") as my_file:
-        library_json = my_file.read()
-
-    cards = json.loads(library_json)
+    with open("library/library.json", "r") as library_file:
+        cards = json.load(library_file)
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -41,10 +39,10 @@ def rebuild():
 
 def main():
 
-    rebuild()
+    rebuild_pages()
     server = Server()
-    server.watch('index0.html', rebuild)
-    server.serve(root='.')
+    server.watch('pages/*.html', rebuild_pages)
+    server.serve(host='localhost', port=5000)
 
 
 if __name__ == '__main__':
