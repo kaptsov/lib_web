@@ -40,34 +40,36 @@
     <div class="container">
       <div class="row row-cols-2">
         {% for card in cards %}
-          <div class="col">
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row no-gutters">
-                <div class="col-md-4">
-                  {% if path_exists(card.hash) %}
-                    <img class="card-img"
-                      src="../library/images/{{card.hash}}"
-                      alt="{{card.title}}">
-                  {% else %}
-                    <img class="card-img"
-                      src="../library/images/nopic.gif"
-                      alt="{{card.title}}">
-                  {% endif %}
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title"> {{card.title}} </h5>
-                    <p class="card-text">{{card.author}}</p>
-                    {% for genre in card.genres %}
-                      <span class="badge badge-secondary">{{genre}}</span>
-                    {% endfor %}
-                    <br>
-                    <a class="mt-4"  href="../library/books/book_{{card.hash}}.txt" target="_blank">[Читать]</a>
+          {% if path_exists('books/book_' + card.hash + '.txt') %}
+            <div class="col">
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    {% if path_exists('images/' + card.hash) %}
+                      <img class="card-img"
+                        src="../library/images/{{card.hash}}"
+                        alt="{{card.title}}">
+                    {% else %}
+                      <img class="card-img"
+                        src="../library/images/nopic.gif"
+                        alt="{{card.title}}">
+                    {% endif %}
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"> {{card.title}} </h5>
+                      <p class="card-text">{{card.author}}</p>
+                      {% for genre in card.genres %}
+                        <span class="badge badge-secondary">{{genre}}</span>
+                      {% endfor %}
+                      <br>
+                      <a class="mt-4"  href="../library/books/book_{{card.hash}}.txt" target="_blank">[Читать]</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>

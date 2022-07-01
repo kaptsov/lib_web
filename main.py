@@ -9,7 +9,7 @@ from more_itertools import chunked
 
 
 def path_exists(path):
-    return exists(f'library/images/{path}')
+    return exists(f'library/{path}')
 
 
 def rebuild():
