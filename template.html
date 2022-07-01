@@ -22,12 +22,12 @@
     <h1 class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">Библиотека Деда Максима - стр.{{num}}</h1>
       <nav aria-label="Pagintor" >
         <ul class="pagination justify-content-center">
-          {% if num == 0 %}
+          {% if num == 1 %}
             <li class="page-item disabled"><a class="page-link" href="#">Назад</a></li>
           {% else %}
             <li class="page-item"><a class="page-link" href="index{{num-1}}.html">Назад</a></li>
           {% endif %}
-          {% for page in range(pages_count) %}
+          {% for page in range(1, pages_count) %}
             <li class="page-item {% if (num == page) %} active {% endif %} "><a class="page-link" href="index{{page}}.html">{{page}}</a></li>
           {% endfor %}
           {% if num == pages_count-1 %}
@@ -62,7 +62,7 @@
                       <span class="badge badge-secondary">{{genre}}</span>
                     {% endfor %}
                     <br>
-                    <a class="mt-4"  href="../library/books/{{card.author}} - {{card.title}}.txt" target="_blank">[Читать]</a>
+                    <a class="mt-4"  href="../library/books/book_{{card.hash}}.txt" target="_blank">[Читать]</a>
                   </div>
                 </div>
               </div>

@@ -26,14 +26,14 @@ def rebuild():
 
     makedirs('pages', exist_ok=True)
     template = env.get_template('template.html')
-    chunk_size = 100
+    chunk_size = 20
 
     pages_count = ceil(len(cards) / chunk_size)
 
     for i, cards_chunk in enumerate(chunked(cards, chunk_size)):
 
-        rendered_page = template.render(cards=cards_chunk, num=i, pages_count=pages_count, path_exists=path_exists)
-        with open(f'pages/index{i}.html', 'w', encoding="utf8") as file:
+        rendered_page = template.render(cards=cards_chunk, num=i+1, pages_count=pages_count, path_exists=path_exists)
+        with open(f'pages/index{i+1}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
     print("Site rebuilt")
